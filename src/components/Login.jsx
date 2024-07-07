@@ -50,7 +50,8 @@ const Login = () => {
                     </div>
                     <input type="submit" value="log in" className="primary-button login-button" />
                     <div className="login-links">
-                        <a href="/" className="login-link">Forgot my password</a>
+                    {/*No se va autlizar de momento */}
+                    { /* <a href="/" className="login-link">Forgot my password</a> */}
                         <input type="submit" value="sign up" className="secondary-button login-button" />
                     </div>
                 </form>
