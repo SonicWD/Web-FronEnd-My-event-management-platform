@@ -11,6 +11,16 @@ const CreateEvent = () => {
     // Función para manejar el envío del formulario
     const handleSubmit = async (event) => {
         event.preventDefault(); // Evita el comportamiento por defecto del formulario
+        
+       //ESTO ES PARA SIMULAR LA CARGA FALSA DE DATOS MIENTRAS EL BACKEND SE HACE
+       // alert('Event created successfully');
+
+       // Limpiar los campos del formulario después de la creación simulada
+       // setTitle('');
+       // setDescription('');
+       // setDate('');
+
+
 
         try {
             // Obtener el token del localStorage para autenticación
@@ -41,43 +51,47 @@ const CreateEvent = () => {
 
     // Componente de formulario para crear un evento
     return (
-        <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded shadow-md">
-            <h2 className="text-xl font-bold mb-6">Create Event</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                    <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title:</label>
-                    <input
-                        id="title"
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description:</label>
-                    <textarea
-                        id="description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date:</label>
-                    <input
-                        id="date"
-                        type="datetime-local"
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                        required
-                    />
-                </div>
-                <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Create Event</button>
-            </form>
+        <div className="login">
+            <div className="form-container">   
+                <h1 className="title">Create Event</h1>
+                <form onSubmit={handleSubmit} className="form">
+                    <div>
+                        <label htmlFor="title" className="label">Title:</label>
+                        <input
+                            type="text"
+                            id="title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder="Enter event title"
+                            className="input input-email"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="description" className="label">Description:</label>
+                        <textarea
+                            id="description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            placeholder="Enter event description"
+                            className="input input-password"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="date" className="label">Date:</label>
+                        <input
+                            type="datetime-local"
+                            id="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                            className="input input-email"
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="primary-button login-button">Create Event</button>
+                </form>
+            </div>
         </div>
     );
 };

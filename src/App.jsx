@@ -9,6 +9,7 @@ import RegisterEvent from './components/RegisterEvent';
 import EventRegistrations from './components/EventRegistrations';
 import CreateAccount from "./components/CreateAccount";
 
+
 const App = () => {
   return (
     <Router>
