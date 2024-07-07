@@ -707,7 +707,7 @@ css para password_recovery2
 @media (max-width: 640px) {
   .login,
   .email-send {
-    width: 70%;
+    width: 80%;
     height: calc(100vh - 80px);
   }
 

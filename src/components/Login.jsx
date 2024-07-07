@@ -23,7 +23,6 @@ const Login = () => {
         <div className="login">
             <div className="form-container">   
                 <h1 className="title">Login</h1>
-                <img src="/Eccomerce-Proyect/assets/images/logos/logo_yard_sale.svg" alt="logo" className="logo" />
                 <form onSubmit={handleSubmit} className="form">
                     <div>
                         <label htmlFor="email" className="label">Email address</label>

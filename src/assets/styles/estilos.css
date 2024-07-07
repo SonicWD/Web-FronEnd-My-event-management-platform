@@ -705,11 +705,11 @@
   
   /* Estilos responsivos */
   @media (max-width: 640px) {
-    .login,
+   /* Creo que este no es necesario por el momento*/
+    /* .login,
     .email-send {
-      width: 70%;
       height: calc(100vh - 80px);
-    }
+    }*/
   
     .logo {
       width: 200px;
