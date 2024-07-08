@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
-import '../index.css'; 
+import '../../index.css';
 
 const CreateAccount = () => {
     const [name, setName] = useState('');

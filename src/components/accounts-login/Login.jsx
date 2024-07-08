@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../index.css'; // Asegúrate de ajustar la ruta si es necesario
+import '../../index.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');

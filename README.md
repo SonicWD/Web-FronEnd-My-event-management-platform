@@ -1,46 +1,118 @@
-# React + Vite Portfolio
+# Event Manager Application
 
-## (Nota 1) Actualización de Dependencias 
+## Descripción
+Esta es una aplicación de administración de eventos construida con React. Permite a los usuarios ver una lista de eventos, hacer clic en un evento para ver los detalles y registrar eventos. Actualmente, la aplicación utiliza datos falsos para desarrollo mientras se implementa el backend.
 
-Durante la instalación de dependencias, se encontraron varios mensajes de advertencia. Para resolverlos, se desinstalaron y reemplazaron las dependencias obsoletas.
+## Funcionalidades
+- Listar eventos disponibles.
+- Ver detalles de un evento específico.
+- Crear un nuevo evento.
+- Registrar un evento (funcionalidad futura).
 
-### Mensajes de Advertencia Solucionados:
+## Estructura del Proyecto
 
-- **inflight@1.0.6**: No es compatible y tiene fugas de memoria. Se recomendó usar `lru-cache`.
-- **@humanwhocodes/config-array@0.11.14**: Se actualizó a `@eslint/config-array`.
-- **rimraf@3.0.2** y **glob@7.2.3**: Se actualizaron a las versiones más recientes.
-- **@humanwhocodes/object-schema@2.0.3**: Se actualizó a `@eslint/object-schema`.
+/frontend
+  ├── public
+  ├── src
+      ├── components
+          ├──accounts-login
+              ├──CreateAccount.jsx
+              ├──Login.jsx
+              ├──Register.jsx
+          Events    
+              ├── EventList.jsx
+              ├── EventDetail.jsx
+              ├── EventPage.jsx
+              ├── CreateEvent.jsx
+      ├──App.jsx
+      ├──index.css
+      ├──main.jsx
+  ├── package.json
+  ├── README.md
+ 
+## Dependencias
+Este proyecto utiliza las siguientes dependencias:
+- React
+- Axios
+- PropTypes
 
-### Pasos Realizados:
+## Instalación
+Sigue estos pasos para configurar y ejecutar el proyecto localmente:
 
-1. **Actualizar Dependencias Obsoletas:**
+1. Clona el repositorio:
+    ```sh
+    git clone https://github.com/tu-usuario/event-manager.git
+    ```
 
-   ```sh
-   npm uninstall inflight
-   npm install lru-cache
-   npm uninstall @humanwhocodes/config-array
-   npm install @eslint/config-array
-   npm uninstall @humanwhocodes/object-schema
-   npm install @eslint/object-schema
-   npm install rimraf@latest glob@latest
+2. Navega al directorio del proyecto:
+    ```sh
+    cd frontend
+    ```
 
-### Verificar Compatibilidad
+3. Instala las dependencias necesarias:
+    ```sh
+    npm install
+    ```
 
-Se verificaron las actualizaciones para asegurar la compatibilidad con el proyecto.
+## Scripts Disponibles
+En el directorio del proyecto, puedes ejecutar:
 
-### Actualizar `package.json`
+### `npm start`
+Ejecuta la aplicación en modo de desarrollo.
+Abre [http://localhost:3000](http://localhost:3000) para verla en el navegador.
 
-```json
-{
-  "dependencies": {
-    "@eslint/config-array": "^1.0.0",
-    "@eslint/object-schema": "^1.0.0",
-    "lru-cache": "^6.0.0",
-    "rimraf": "^4.0.0",
-    "glob": "^9.0.0"
-  }
-}
+### `npm test`
+Lanza el corredor de pruebas en el modo de reloj interactivo.
+Consulta la sección sobre running tests para obtener más información.
 
-## Se instala tailwin
+### `npm run build`
+Construye la aplicación para producción en la carpeta `build`.
+Empaqueta React en modo de producción y optimiza la compilación para obtener el mejor rendimiento.
 
+## Componentes
 
+### `EventPage.jsx`
+Maneja el estado general y la lógica para mostrar la lista de eventos y los detalles de un evento seleccionado. Utiliza datos falsos para pruebas.
+
+### `EventList.jsx`
+Lista todos los eventos disponibles. Actualmente, obtiene datos falsos generados localmente.
+
+### `EventDetail.jsx`
+Muestra los detalles de un evento específico cuando se selecciona.
+
+### `CreateEvent.jsx`
+Formulario para crear un nuevo evento. Permite a los usuarios ingresar detalles del evento y enviarlos.
+
+## Ejemplo de Datos Falsos
+Los datos falsos se generan con la siguiente función para desarrollo:
+
+```js
+const generateFakeEvents = () => {
+    return [
+        { id: 1, title: 'Evento falso 1', description: 'nanana mañana a las 8', date: new Date().toISOString(), location: 'Auditorio Principal', image: 'https://via.placeholder.com/150' },
+        { id: 2, title: 'Evento falso 2', description: 'Pasado mañana supongo reunion con RH por chiste de la capa 8 a clientes xd', date: new Date().toISOString(), location: 'Sala de Juntas', image: 'https://via.placeholder.com/150' },
+    ];
+};
+
+## Uso de Datos Falsos
+Para usar datos falsos mientras se implementa el backend, comenta la lógica de `useEffect` que hace la llamada a la API real y usa los datos generados localmente:
+
+```js
+useEffect(() => {
+    // const fetchEvents = async () => {
+    //     try {
+    //         const response = await axios.get('/events');
+    //         setEvents(Array.isArray(response.data) ? response.data : []);
+    //     } catch (error) {
+    //         setError('Error fetching events');
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
+    // fetchEvents();
+    setEvents(generateFakeEvents());
+    setLoading(false);
+}, []);
+
+## Estilos
+Los componentes utilizan clases CSS predefinidas en `assets/styles/estilos.css` para asegurar una apariencia coherente.

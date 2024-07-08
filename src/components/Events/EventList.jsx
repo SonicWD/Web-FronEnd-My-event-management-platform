@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 //Luego ahi que quitar eso
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios';
-import '../index.css'; // Asegúrate de ajustar la ruta si es necesario
+import '../../index.css';
 
 // Función para generar datos falsos de eventos
 const generateFakeEvents = () => {
