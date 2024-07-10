@@ -1,14 +1,62 @@
 /* eslint-disable no-unused-vars */
-import Reacrt from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 const EventDetail = ({ event, onClose }) => {
+    const [registrations, setRegistrations] = useState([]);
+    const [isRegistered, setIsRegistered] = useState(false);
+
+    useEffect(() => {
+        if (event) {
+            console.log('EventDetail loaded with event:', event);
+            const fetchRegistrations = async () => {
+                try {
+                    const token = localStorage.getItem('token');
+                    if (!token) {
+                        alert('No token found. Please log in.');
+                        return;
+                    }
+                    const response = await axios.get(`/events/${event.id}/registrations`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
+                    setRegistrations(response.data || []);  // Asegúrate de que sea un array
+                } catch (error) {
+                    alert('Failed to fetch registrations');
+                }
+            };
+            fetchRegistrations();
+        }
+    }, [event]);
+
+    const handleRegister = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('No token found. Please log in.');
+                return;
+            }
+            await axios.post(`/events/${event.id}/register`, {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setIsRegistered(true);
+            alert('Successfully registered for the event');
+            setRegistrations([...registrations, { user_id: 'current_user' }]); // Assuming current user
+        } catch (error) {
+            alert('Failed to register for the event');
+        }
+    };
+
     if (!event) return null;
 
     return (
         <aside className="product-detail">
             <div className="product-detail-close" onClick={onClose}>
-                <img src="/assets/images/icons/icon_close.png" alt="close" />
+                <img src="/images/icons/icon_close.png" alt="close" />
             </div>
             <img src={event.image} alt={event.title} />
             <div className="points">
@@ -21,10 +69,23 @@ const EventDetail = ({ event, onClose }) => {
                 <p>{new Date(event.date).toLocaleString()}</p>
                 <p>{event.location}</p>
                 <p>{event.description}</p>
-                <button className="primary-button add-to-cart-button">
-                    <img src="/assets/images/icons/bt_add_to_cart.svg" alt="add to cart" />
-                    Add to cart
+                <button 
+                    className="primary-button add-to-cart-button" 
+                    onClick={handleRegister} 
+                    disabled={isRegistered}
+                >
+                    {isRegistered ? 'Registered' : 'Register'}
                 </button>
+                <div>
+                    <h3>Participants:</h3>
+                    <ul>
+                        {registrations.map(registration => (
+                            <li key={registration.user_id}>
+                                User ID: {registration.user_id}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </aside>
     );
@@ -38,7 +99,7 @@ EventDetail.propTypes = {
         date: PropTypes.string.isRequired,
         location: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
-    }).isRequired,
+    }),
     onClose: PropTypes.func.isRequired,
 };
 

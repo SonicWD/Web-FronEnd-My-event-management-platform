@@ -1,10 +1,9 @@
 // frontend/src/TestComponent.jsx
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 const TestComponent = () => {
-  const history = useHistory();
+  const history = useNavigate();
 
   const navigate = (path) => {
     history.push(path);

@@ -1,10 +1,11 @@
-// frontend/src/components/EventList.js
+// frontend/src/components/Events/EventList.jsx
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
-//Luego ahi que quitar eso
+// Luego hay que quitar eso
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios';
 import '../../index.css';
+import PropTypes from 'prop-types';
 
 // Función para generar datos falsos de eventos
 const generateFakeEvents = () => {
@@ -28,8 +29,7 @@ const generateFakeEvents = () => {
     ];
 };
 
-
-const EventList = () => {
+const EventList = ({ onSelectEvent }) => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     // eslint-disable-next-line no-unused-vars
@@ -43,20 +43,21 @@ const EventList = () => {
             setLoading(false);
         }, 1000); // Simular retardo de 1 segundo
     }, []);
- //ESTO ES PARA CUAL EL BACKEND FUNCIONE ;)   
- //   useEffect(() => {
- //       const fetchEvents = async () => {
- //           try {
- //               const response = await axios.get('/events');
-  //              setEvents(Array.isArray(response.data) ? response.data : []);
-  //          } catch (error) {
-  //              setError('Error fetching events');
- //           } finally {
-  //              setLoading(false);
-  //          }
- //       };
-  //      fetchEvents();
-  //  }, []);
+
+    //ESTO ES PARA CUANDO EL BACKEND FUNCIONE ;)
+    // useEffect(() => {
+    //     const fetchEvents = async () => {
+    //         try {
+    //             const response = await axios.get('/events');
+    //             setEvents(Array.isArray(response.data) ? response.data : []);
+    //         } catch (error) {
+    //             setError('Error fetching events');
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+    //     fetchEvents();
+    // }, []);
 
     if (loading) {
         return <p className="text-center mt-4">Loading events...</p>;
@@ -74,7 +75,7 @@ const EventList = () => {
             ) : (
                 <div className="cards-container">
                     {events.map((event) => (
-                        <div key={event.id} className="product-card">
+                        <div key={event.id} className="product-card" onClick={() => onSelectEvent(event)}>
                             <img src={event.image} alt={event.title} />
                             <div className="product-info">
                                 <div>
@@ -93,6 +94,10 @@ const EventList = () => {
             )}
         </div>
     );
+};
+
+EventList.propTypes = {
+    onSelectEvent: PropTypes.func.isRequired,
 };
 
 export default EventList;
