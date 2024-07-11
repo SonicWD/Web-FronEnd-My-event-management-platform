@@ -9,7 +9,7 @@ const CreateAccount = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aquí puedes manejar el envío del formulario, por ejemplo, haciendo una solicitud a tu servidor
+        // Aquí se puede manejar el envío del formulario haciendo una solicitud a tu servidor
         console.log('Account created:', { name, email, password });
     };
 
