@@ -24,6 +24,12 @@ const AccountPage = () => {
     // Aquí puedes hacer una llamada a la API para guardar los cambios
   };
 
+  const handleLogout = () => {
+    // Aquí Esta pendiente la logica para cerrar la secion
+    // Por ejemplo, limpiar el almacenamiento local, eliminar tokens, etc.
+    alert('Cerrar sesión pendiente');
+  };
+
   return (
     <div className="login">
       <div className="form-container">
@@ -50,6 +56,9 @@ const AccountPage = () => {
             <button className="secondary-button" onClick={() => setIsEditing(true)}>
               Editar
             </button>
+            <button className="primary-button" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
           </>
         )}
       </div>
@@ -58,4 +67,3 @@ const AccountPage = () => {
 };
 
 export default AccountPage;
-
