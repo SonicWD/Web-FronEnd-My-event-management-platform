@@ -85,7 +85,7 @@ const EventList = ({ onSelectEvent }) => {
                                     <p className="text-gray-500">{event.location}</p>
                                 </div>
                                 <figure>
-                                    <img src="/images/icons/bt_add_to_cart.svg" alt="" />
+                                    <img src="/images/icons/calendar-search-svgrepo-com.svg" alt="" />
                                 </figure>
                             </div>
                         </div>

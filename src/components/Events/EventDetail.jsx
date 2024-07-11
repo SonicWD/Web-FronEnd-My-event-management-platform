@@ -59,11 +59,7 @@ const EventDetail = ({ event, onClose }) => {
                 <img src="/images/icons/icon_close.png" alt="close" />
             </div>
             <img src={event.image} alt={event.title} />
-            <div className="points">
-                <li><button className="active"></button></li>
-                <li><button></button></li>
-                <li><button></button></li>
-            </div>
+            
             <div className="product-info-details">
                 <p>{event.title}</p>
                 <p>{new Date(event.date).toLocaleString()}</p>

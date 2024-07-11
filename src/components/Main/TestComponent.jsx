@@ -16,10 +16,11 @@ const TestComponent = () => {
       <p>El componente de prueba está funcionando correctamente.</p>
       <div>
         <button onClick={() => navigateTo('/login')}>Go to Login</button>
-        <button onClick={() => navigateTo('/register')}>Go to Register</button>
         <button onClick={() => navigateTo('/create-account')}>Go to Create Account</button>
         <button onClick={() => navigateTo('/create-event')}>Go to Create Event</button>
         <button onClick={() => navigateTo('/eventsP')}>Go to Event Page</button>
+        <button onClick={() => navigateTo('/account')}>Go to Account info</button>
+
       </div>
     </div>
   );

@@ -34,52 +34,20 @@ body {
     min-height: 100vh;
 
 }*/
-.login,
-.email-send {
+.login {
   display: flex;
   justify-content: center;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  width: 120%;
+  width: 80%;
   max-width: 400px;
 }
 
 /*
 css para password_recovery2
 */
-
-.information-container {
-  align-items: center;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.email-image {
-  display: flex;
-  justify-content: center;
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  background-color: var(--text-input-field);
-  margin-bottom: 30px;
-}
-
-.email-image img {
-  width: 80px;
-}
-
-.resend-email {
-  font-size: var(--sm);
-  color: var(--very-light-pink);
-}
-
-.resend-email a {
-  color: var(--hospital-green);
-  text-decoration: dotted;
-}
 
 .form-container {
   align-items: center;
@@ -100,13 +68,6 @@ css para password_recovery2
   font-size: var(--lg);
   margin-bottom: 40px;
   text-align: start;
-}
-
-.subtitle,
-.resend-email {
-  font-size: var(--md);
-  color: var(--very-light-pink);
-  margin-bottom: 20px;
 }
 
 .value {
@@ -156,9 +117,6 @@ css para password_recovery2
   border: 1px solid #cccccc;
   font-size: var(--md);
 }
-
-
-
 .primary-button,
 .secondary-button {
   padding: 10px 20px;
@@ -174,12 +132,9 @@ css para password_recovery2
   width: 250px;
   margin: 10px 0; /* Margen vertical a los botones */
 }
-
-
 .primary-button:hover {
   background-color: var(--difuminado1-bottom);
 }
-
 .secondary-button {
   background-color: var(--white);
   border: 1px solid var(--hospital-green);
@@ -187,12 +142,10 @@ css para password_recovery2
   width: 100%;
   cursor: pointer;
 }
-
 .secondary-button:hover {
   background-color: var(--difuminado2-bottom);
   color: var(--white);
 }
-
 /*css de la cartas de compra */
 .cards-container {
   display: flex;
@@ -326,88 +279,6 @@ css para password_recovery2
   color: var(--hospital-green) !important;
 }
 
-/* My Order Styles */
-.my-order {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f4f4f4;
-  /* Fondo añadido para mejorar la visualización */
-}
-
-.my-order-container {
-  display: flex;
-  flex-direction: column;
-  width: 60vh;
-  max-width: 800px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  margin: 20px;
-  align-items: center;
-  height: 100%;
-}
-.my-order-content{
- 
-  width: 100%;
-}
-.my-order-content .primary-button {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  /* Centra los elementos verticalmente */
-  align-items: center;
-  margin: 0;
-}
-
-.title-order {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #333333;
-}
-
-.order {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  height: 100%;
-  align-items: center;
-  background-color: var(--text-input-field);
-  border-radius: 8px;
-  padding: 0 24px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom:30px;
-  margin-left: 12px;
-  margin-right: 12px;
-}
-
-
-.order p:nth-child(1) {
-  display: flex;
-  flex-direction: column;
-}
-
-.order p:nth-child(2) {
-  text-align: end;
-  font-weight: bold;
-  font-size: var(--sm);
-  color: var(--very-light-pink);
-}
-
-.order p span:nth-child(1) {
-  font-size: 14px;
-  font-weight: bold;
-  color: #555555;
-}
-
-.order p span:nth-child(2) {
-  font-size: 12px;
-  color: var(--hospital-green);
-}
 
 .shopping-cart { /* se ve mejor con grid que con felx para este caso en especifico pelotudo */
   display: grid;
@@ -456,7 +327,6 @@ css para password_recovery2
 .logo-navbar {
   width: 100px;
 }
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -467,6 +337,8 @@ css para password_recovery2
   border-bottom: 1px solid var(--very-light-pink);
   position: fixed;
   top: 0;
+  background-color: white; /* Asegúrate de tener un fondo */
+  z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
 }
 
 .navbar-left ul,
@@ -481,11 +353,13 @@ css para password_recovery2
 
 .navbar-left {
   display: flex;
+  align-items: center; /* Asegúrate de que los elementos estén alineados verticalmente */
   margin-left: 14px;
 }
 
 .navbar-right {
   display: flex;
+  align-items: center; /* Asegúrate de que los elementos estén alineados verticalmente */
   margin-right: 14px;
 }
 
@@ -607,39 +481,6 @@ css para password_recovery2
   height: auto;
   border-radius: 50%;
 }
-/*ponits abajo de la imagen */
-.points {
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  margin-top: 14px; 
-}
-
-.points li {
-  list-style: none;
-  margin-inline: 10px; /* Reducido el margen para un aspecto más compacto */
-}
-
-.points button {
-  background-color: var(--very-light-pink);
-  border: none;
-  border-radius: 50%;
-  height: 12px; 
-  width: 12px; 
-  padding: 0; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease; 
-  vertical-align: middle; 
-}
-
-.points button:hover {
-  background-color: var(--hospital-green); 
-}
-.points .active {
-  border: 2px solid var(--hospital-green); 
-  background-color: var(--hospital-green);
-}
-
 /* Imagen del producto en el detalle */
 .product-detail img:nth-child(2) {
   width: 100%;
@@ -705,9 +546,8 @@ css para password_recovery2
 
 /* Estilos responsivos */
 @media (max-width: 640px) {
-  .login,
-  .email-send {
-    width: 80%;
+  .login {
+    width: 70%;
     height: calc(100vh - 80px);
   }
 
@@ -721,10 +561,7 @@ css para password_recovery2
     font-size: 20px;
   }
 
-  .subtitle,
-  .resend-email {
-    font-size: 14px;
-  }
+  
   .form-container,
   .information-container {
     height: 100%;
