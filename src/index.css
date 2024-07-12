@@ -333,12 +333,11 @@ css para password_recovery2
   align-items: center;
   height: 60px;
   width: 100%;
-  padding: 0 24px;
   border-bottom: 1px solid var(--very-light-pink);
   position: fixed;
+  left: 0;
   top: 0;
-  background-color: white; /* Asegúrate de tener un fondo */
-  z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
+  /* background-color: white; */
 }
 
 .navbar-left ul,
@@ -398,6 +397,7 @@ css para password_recovery2
 
 .navbar-shopping-cart {
   position: relative;
+  margin-right: 15px;
 }
 
 .navbar-shopping-cart div {

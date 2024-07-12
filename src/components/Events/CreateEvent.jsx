@@ -28,7 +28,7 @@ const CreateEvent = () => {
             const token = localStorage.getItem('token');
 
             // Realizar la solicitud POST al backend utilizando axios
-            await axios.post('http://localhost:5000/events_create', {
+            await axios.post('http://localhost:5000/events-create', {
                 title,         // Enviar título
                 description,   // Enviar la descripción 
                 date           // Enviar la fecha
