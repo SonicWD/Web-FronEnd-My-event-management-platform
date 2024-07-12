@@ -1,20 +1,21 @@
-// frontend/src/components/Login.js
-// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../../index.css';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/login', { email, password });
-            localStorage.setItem('token', response.data.access_token);
-            alert('Login successful');
+            const response = await axios.post('http://localhost:8000/login', { username, password });
+            console.log('Login successful');
+            navigate('/');
         } catch (error) {
+            console.error('Login failed', error);
             alert('Login failed');
         }
     };
@@ -25,14 +26,14 @@ const Login = () => {
                 <h1 className="title">Login</h1>
                 <form onSubmit={handleSubmit} className="form">
                     <div>
-                        <label htmlFor="email" className="label">Email address</label>
+                        <label htmlFor="username" className="label">Username</label>
                         <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="example@example.com"
-                            className="input input-email"
+                            type="text"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Username"
+                            className="input input-username"
                             required
                         />
                     </div>
@@ -50,8 +51,8 @@ const Login = () => {
                     </div>
                     <input type="submit" value="log in" className="primary-button login-button" />
                     <div className="login-links">
-                    {/*No se va autlizar de momento */}
-                    { /* <a href="/" className="login-link">Forgot my password</a> */}
+                    {/* No se va a utilizar de momento */}
+                    {/* <a href="/" className="login-link">Forgot my password</a> */}
                         <input type="submit" value="sign up" className="secondary-button login-button" />
                     </div>
                 </form>

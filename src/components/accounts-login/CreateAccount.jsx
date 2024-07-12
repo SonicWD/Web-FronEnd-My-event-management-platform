@@ -1,16 +1,38 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import '../../index.css';
+import { useNavigate } from 'react-router-dom';
 
 const CreateAccount = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aquí se puede manejar el envío del formulario haciendo una solicitud a tu servidor
-        console.log('Account created:', { name, email, password });
+
+        try {
+            const response = await fetch('http://localhost:8000/user-register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: name,
+                    email: email,
+                    password: password,
+                }),
+            });
+
+            if (response.ok) {
+                console.log('Account created');
+                navigate('/');
+            } else {
+                console.error('Failed to create account:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (
