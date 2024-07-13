@@ -17,12 +17,12 @@ const EventDetail = ({ event, onClose }) => {
                         alert('No token found. Please log in.');
                         return;
                     }
-                    const response = await axios.get(`/events/${event.id}/registrations`, {
+                    const response = await axios.get(`http://localhost:8000/events/${event.id}/registrations`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
                     });
-                    setRegistrations(response.data || []);  // Asegúrate de que sea un array
+                    setRegistrations(response.data || []);
                 } catch (error) {
                     alert('Failed to fetch registrations');
                 }
@@ -38,14 +38,14 @@ const EventDetail = ({ event, onClose }) => {
                 alert('No token found. Please log in.');
                 return;
             }
-            await axios.post(`/events/${event.id}/register`, {}, {
+            await axios.post(`http://localhost:8000/events/${event.id}/register`, {}, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
             setIsRegistered(true);
             alert('Successfully registered for the event');
-            setRegistrations([...registrations, { user_id: 'current_user' }]); // Assuming current user
+            setRegistrations([...registrations, { user_id: 'current_user' }]);
         } catch (error) {
             alert('Failed to register for the event');
         }
@@ -94,7 +94,7 @@ EventDetail.propTypes = {
         description: PropTypes.string.isRequired,
         date: PropTypes.string.isRequired,
         location: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
+        image_url: PropTypes.string.isRequired,
     }),
     onClose: PropTypes.func.isRequired,
 };

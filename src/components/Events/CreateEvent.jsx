@@ -7,31 +7,41 @@ const CreateEvent = () => {
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
     const [ownerUsername, setOwnerUsername] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
+    const [maxCapacity, setMaxCapacity] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:8000/events-create', {
+
+            const eventData = {
                 title,
                 description,
                 date,
-                owner_username: ownerUsername
-            }, {
+                owner_username: ownerUsername,
+                image: imageUrl,
+                max_capacity: maxCapacity
+            };
+
+            await axios.post('http://localhost:8000/events-create', eventData, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
                 }
             });
-        
+
             alert('Event created successfully');
             setTitle('');
             setDescription('');
             setDate('');
             setOwnerUsername('');
+            setImageUrl('');
+            setMaxCapacity('');
         } catch (error) {
             console.error('Error creating event:', error);
             alert('Failed to create event');
-        }        
+        }
     };
     
     return (
@@ -39,6 +49,19 @@ const CreateEvent = () => {
             <div className="form-container">   
                 <h1 className="title">Create Event</h1>
                 <form onSubmit={handleSubmit} className="form">
+                    <div>
+                        <label htmlFor="imageUrl" className="label">Image URL:</label>
+                        <input
+                            type="text"
+                            id="imageUrl"
+                            value={imageUrl}
+                            onChange={(e) => setImageUrl(e.target.value)}
+                            placeholder="Enter image URL"
+                            className="input"
+                            required
+                        />
+                    </div>
+
                     <div>
                         <label htmlFor="title" className="label">Title:</label>
                         <input
@@ -81,6 +104,18 @@ const CreateEvent = () => {
                             value={ownerUsername}
                             onChange={(e) => setOwnerUsername(e.target.value)}
                             placeholder="Enter owner username"
+                            className="input input-email"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="maxCapacity" className="label">Max Capacity:</label>
+                        <input
+                            type="number"
+                            id="maxCapacity"
+                            value={maxCapacity}
+                            onChange={(e) => setMaxCapacity(e.target.value)}
+                            placeholder="Enter max capacity"
                             className="input input-email"
                             required
                         />
