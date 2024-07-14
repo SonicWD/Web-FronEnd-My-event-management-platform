@@ -1,14 +1,33 @@
-import React, { useState } from 'react';
+// eslint-disable-next-line no-unused-vars
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getUserInfo } from '../Main/api'; // Importa la función de la API aquí
 import '../../index.css';
 
 const CreateEvent = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
-    const [ownerUsername, setOwnerUsername] = useState('');
+    const [ownerId, setOwnerId] = useState(null); // Nuevo estado para almacenar ownerId
     const [imageUrl, setImageUrl] = useState('');
     const [maxCapacity, setMaxCapacity] = useState('');
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                try {
+                    const userInfo = await getUserInfo(token);
+                    setOwnerId(userInfo.id); // Actualiza ownerId con el id del usuario obtenido
+                } catch (error) {
+                    console.error('Error fetching user info:', error);
+                    // Manejo de errores, por ejemplo, mostrar un mensaje al usuario o redirigir a una página de error
+                }
+            }
+        };
+
+        fetchUserInfo();
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,9 +38,9 @@ const CreateEvent = () => {
                 title,
                 description,
                 date,
-                owner_username: ownerUsername,
                 image: imageUrl,
-                max_capacity: maxCapacity
+                max_capacity: parseInt(maxCapacity), // Asegura que max_capacity sea un número entero
+                owner_id: ownerId // Usa el ownerId obtenido del usuario
             };
 
             await axios.post('http://localhost:8000/events-create', eventData, {
@@ -35,7 +54,6 @@ const CreateEvent = () => {
             setTitle('');
             setDescription('');
             setDate('');
-            setOwnerUsername('');
             setImageUrl('');
             setMaxCapacity('');
         } catch (error) {
@@ -96,18 +114,7 @@ const CreateEvent = () => {
                             required
                         />
                     </div>
-                    <div>
-                        <label htmlFor="ownerUsername" className="label">Owner Username:</label>
-                        <input
-                            type="text"
-                            id="ownerUsername"
-                            value={ownerUsername}
-                            onChange={(e) => setOwnerUsername(e.target.value)}
-                            placeholder="Enter owner username"
-                            className="input input-email"
-                            required
-                        />
-                    </div>
+                    {/* ownerUsername input removed as ownerId is used instead */}
                     <div>
                         <label htmlFor="maxCapacity" className="label">Max Capacity:</label>
                         <input

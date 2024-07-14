@@ -65,6 +65,9 @@ const EventDetail = ({ event, onClose }) => {
                 <p>{new Date(event.date).toLocaleString()}</p>
                 <p>{event.location}</p>
                 <p>{event.description}</p>
+                <p>Organizado por: {event.owner_username}</p>
+                <p>Capacidad: {event.max_capacity}</p>
+
                 <button 
                     className="primary-button add-to-cart-button" 
                     onClick={handleRegister} 
@@ -89,13 +92,14 @@ const EventDetail = ({ event, onClose }) => {
 
 EventDetail.propTypes = {
     event: PropTypes.shape({
-        image: PropTypes.image,
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
         date: PropTypes.string.isRequired,
-        location: PropTypes.string.isRequired,
-        image_url: PropTypes.string.isRequired,
+        location: PropTypes.string, 
+        image: PropTypes.string.isRequired,
+        owner_username: PropTypes.string.isRequired,
+        max_capacity: PropTypes.number.isRequired
     }),
     onClose: PropTypes.func.isRequired,
 };

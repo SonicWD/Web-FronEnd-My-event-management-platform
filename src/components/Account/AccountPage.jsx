@@ -2,44 +2,54 @@
 import React, { useEffect, useState } from 'react';
 import MyAccount from './My-Account';
 import EditAccount from './EditAccount';
+import { getUserInfo } from '../Main/api'; // Importa la función de la API aquí
 
 const AccountPage = () => {
-  const [userInfo, setUserInfo] = useState({ name: '', email: '', password: '' });
+  const [userInfo, setUserInfo] = useState(null); // Inicializa userInfo como null para indicar estado de carga
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    // Simulación de llamada a la API
-    setTimeout(() => {
-      setUserInfo({
-        name: 'Camila Yokoo',
-        email: 'camilayokoo@gmail.com',
-        password: '*********'
-      });
-    }, 1000);
+    const fetchUserInfo = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const userData = await getUserInfo(token);
+          setUserInfo(userData); // Actualiza userInfo con los datos del usuario
+        } catch (error) {
+          console.error('Error fetching user info:', error);
+          // Manejo de errores, por ejemplo, mostrar un mensaje al usuario o redirigir a una página de error
+        }
+      }
+    };
+
+    fetchUserInfo();
   }, []);
 
   const handleSave = (updatedInfo) => {
     setUserInfo(updatedInfo);
     setIsEditing(false);
-    // Aquí puedes hacer una llamada a la API para guardar los cambios
+    // Aquí puedes hacer una llamada a la API para guardar los cambios si es necesario
   };
 
   const handleLogout = () => {
-    // Aquí Esta pendiente la logica para cerrar la secion
-    // Por ejemplo, limpiar el almacenamiento local, eliminar tokens, etc.
-    alert('Cerrar sesión pendiente');
+    // Lógica para cerrar sesión
+    localStorage.removeItem('token'); // Elimina el token del localStorage
+    // Otros pasos necesarios para cerrar sesión, como redirigir a la página de inicio de sesión
   };
+
+  if (!userInfo) {
+    return <div>Cargando...</div>; // Muestra un mensaje de carga mientras se obtienen los datos del usuario
+  }
 
   return (
     <div className="login">
       <div className="form-container">
-        <h1 className="title">My account</h1>
+        <h1 className="title">Mi cuenta</h1>
         {isEditing ? (
           <>
-            <EditAccount 
-              initialName={userInfo.name}
+            <EditAccount
+              initialName={userInfo.username}
               initialEmail={userInfo.email}
-              initialPassword={userInfo.password}
               onSave={handleSave}
             />
             <button className="secondary-button" onClick={() => setIsEditing(false)}>
@@ -49,9 +59,9 @@ const AccountPage = () => {
         ) : (
           <>
             <MyAccount
-              name={userInfo.name}
+              name={userInfo.username}
               email={userInfo.email}
-              password={userInfo.password}
+              password='**************'
             />
             <button className="secondary-button" onClick={() => setIsEditing(true)}>
               Editar

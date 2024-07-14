@@ -2,18 +2,14 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Route, Navigate } from 'react-router-dom';
+import {  Navigate } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
 
-const PrivateRoute = ({ element: Element, ...rest }) => {
+const PrivateRoute = ({ element: Component }) => {
     const { authState } = useContext(AuthContext);
-    return (
-        <Route
-            {...rest}
-            element={authState.isAuthenticated ? <Element /> : <Navigate to="/login" />}
-        />
-    );
-};
+  
+    return authState.isAuthenticated ? <Component /> : <Navigate to="/login" />;
+  };
 
 PrivateRoute.propTypes = {
     element: PropTypes.elementType.isRequired,

@@ -1,12 +1,11 @@
-// src/App.jsx
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Main/Navbar";
-import TestComponent from "./components/Main/TestComponent";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Main/Navbar';
+import TestComponent from './components/Main/TestComponent';
 import Login from './components/accounts-login/Login';
 import CreateEvent from './components/Events/CreateEvent';
-import CreateAccount from "./components/accounts-login/CreateAccount";
-import EventPage from "./components/Events/EventPage";
-import AccountPage from "./components/Account/AccountPage";
+import CreateAccount from './components/accounts-login/CreateAccount';
+import EventPage from './components/Events/EventPage';
+import AccountPage from './components/Account/AccountPage';
 import PrivateRoute from './PrivateRoute';
 
 const App = () => {

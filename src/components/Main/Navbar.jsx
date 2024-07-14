@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserInfo } from './api'; // Asegúrate de ajustar la ruta de importación
+import { getUserInfo } from './api'; 
 import '../../index.css';
 
 const Navbar = () => {
@@ -23,9 +23,8 @@ const Navbar = () => {
   }, []);
 
   const logout = () => {
-    setUsername('');
+    setUsername('');// Limpia el array con la info del user
     localStorage.removeItem('token'); // Elimina el token del localStorage
-    // Aquí puedes redirigir a la página de inicio de sesión u otra página según tu flujo
     navigate('/login');
   };
 
