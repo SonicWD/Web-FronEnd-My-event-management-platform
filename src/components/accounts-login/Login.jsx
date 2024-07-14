@@ -17,18 +17,22 @@ const Login = () => {
             // Send login request to the server
             const response = await axios.post('http://localhost:8000/login', { username, password });
 
-            // Assuming server responds with a token
-            const token = response.data.token;
-            console.log('Login successful');
+            // Extract the token from the response
+            const token = response.data.access_token;
+            if (token) {
+                // Save token to localStorage
+                localStorage.setItem('token', token);
 
-            // Save token to localStorage
-            localStorage.setItem('token', token);
+                // Update the authState context
+                setAuthState({ token, isAuthenticated: true });
 
-            // Update authState
-            setAuthState({ token, isAuthenticated: true });
-
-            // Redirect to home page or any other route
-            navigate('/');
+                // Redirect to home page or any other route
+                navigate('/');
+                console.log('Login successful');
+            } else {
+                console.error('No token received');
+                alert('Login failed');
+            }
         } catch (error) {
             console.error('Login failed', error);
             alert('Login failed');

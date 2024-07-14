@@ -1,10 +1,33 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getUserInfo } from './api'; // Asegúrate de ajustar la ruta de importación
 import '../../index.css';
 
 const Navbar = () => {
+  const [username, setUsername] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const userInfo = await getUserInfo(token);
+        if (userInfo) {
+          setUsername(userInfo.username);
+        }
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
+
+  const logout = () => {
+    setUsername('');
+    localStorage.removeItem('token'); // Elimina el token del localStorage
+    // Aquí puedes redirigir a la página de inicio de sesión u otra página según tu flujo
+    navigate('/login');
+  };
 
   const navigateTo = (path) => {
     navigate(path);
@@ -24,7 +47,8 @@ const Navbar = () => {
       <div className="navbar-right">
         <ul>
           <li className="email-nav">
-            <a onClick={() => navigateTo('/account')}>Cuenta</a>
+            <a>{username}</a>
+            <a onClick={logout}>Cerrar sesión</a>
             <img src="/images/icons/flechita.svg" alt="flecha" />
           </li>
           <li className="navbar-shopping-cart">
