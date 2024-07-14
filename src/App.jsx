@@ -18,9 +18,9 @@ const App = () => {
           <Route path="/" element={<TestComponent />} exact />
           <Route path="/login" element={<Login />} />
           <Route path="/create-account" element={<CreateAccount />} />
-          <PrivateRoute path="/create-event" element={<CreateEvent />} />
-          <PrivateRoute path="/eventsP/*" element={<EventPage />} />
-          <PrivateRoute path="/account" element={<AccountPage />} />
+          <Route path="/create-event" element={<PrivateRoute element={CreateEvent} />} />
+          <Route path="/eventsP/*" element={<PrivateRoute element={EventPage} />} />
+          <Route path="/account" element={<PrivateRoute element={AccountPage} />} />
         </Routes>
       </div>
     </Router>

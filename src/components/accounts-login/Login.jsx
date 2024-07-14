@@ -1,13 +1,15 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import '../../index.css';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { setAuthState } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,14 +17,15 @@ const Login = () => {
             // Send login request to the server
             const response = await axios.post('http://localhost:8000/login', { username, password });
 
-            // Assuming server responds with a success message or any relevant data
+            // Assuming server responds with a token
+            const token = response.data.token;
             console.log('Login successful');
-
-            // Generate a token (you can use any method to generate a secure token)
-            const token = generateToken();
 
             // Save token to localStorage
             localStorage.setItem('token', token);
+
+            // Update authState
+            setAuthState({ token, isAuthenticated: true });
 
             // Redirect to home page or any other route
             navigate('/');
@@ -30,12 +33,6 @@ const Login = () => {
             console.error('Login failed', error);
             alert('Login failed');
         }
-    };
-
-    // Example function to generate a random token (replace with your actual token generation method)
-    const generateToken = () => {
-        // Generate a random token using a secure method (e.g., UUID, crypto libraries)
-        return 'example_token_generated_in_frontend';
     };
 
     return (
