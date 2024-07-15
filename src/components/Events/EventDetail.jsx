@@ -8,6 +8,7 @@ const EventDetail = ({ event, onClose }) => {
   const [registrations, setRegistrations] = useState([]);
   const [isRegistered, setIsRegistered] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -53,8 +54,9 @@ const EventDetail = ({ event, onClose }) => {
         }
       );
       setRegistrations(response.data || []);
+      setIsRegistered(response.data.some(reg => reg.user.id === userInfo.id));
     } catch (error) {
-      alert("Failed to fetch registrations");
+      console.log(error);
     }
   };
 
@@ -86,10 +88,15 @@ const EventDetail = ({ event, onClose }) => {
 
       setIsRegistered(true);
       alert("Successfully registered for the event");
-      setRegistrations([...registrations, { user_id: userInfo.id }]);
+      setRegistrations([...registrations, { user: { id: userInfo.id, username: userInfo.username } }]);
     } catch (error) {
       console.error("Failed to register for the event:", error);
-      alert("Failed to register for the event");
+      if (error.response && error.response.status === 400 && error.response.data.detail === "Event capacity reached") {
+        setErrorMessage("Event capacity reached");
+        console.log("Error message set to: Event capacity reached");
+      } else {
+        alert("Failed to register for the event");
+      }
     }
   };
 
@@ -113,15 +120,18 @@ const EventDetail = ({ event, onClose }) => {
         <button
           className="primary-button add-to-cart-button"
           onClick={handleRegister}
-          disabled={isRegistered}
+          disabled={isRegistered || registrations.length >= event.max_capacity}
         >
-          {isRegistered ? "Registered" : "Register"}
+          {isRegistered ? "Registrado" : "Incribirse"}
         </button>
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar el mensaje de error */}
+
         <div>
           <h3>Participants:</h3>
           <ul>
             {registrations.map((registration, index) => (
-              <li key={index}>User ID: {registration.user_id}</li>
+              <li key={index}>{registration.user.username}</li>
             ))}
           </ul>
         </div>

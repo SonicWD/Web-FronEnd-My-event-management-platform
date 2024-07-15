@@ -48,12 +48,8 @@ const Navbar = () => {
           <li className="email-nav">
             <a>{username}</a>
             <a onClick={logout}>Cerrar sesión</a>
-            <img src="/images/icons/flechita.svg" alt="flecha" />
           </li>
-          <li className="navbar-shopping-cart">
-            <img src="/images/icons/icon_shopping_cart.svg" alt="shopping cart" />
-            <div>2</div>
-          </li>
+    
         </ul>
       </div>
     </header>

@@ -88,7 +88,7 @@ const EditAccount = ({ initialName, initialEmail, initialPassword, onSave }) => 
 EditAccount.propTypes = {
   initialName: PropTypes.string.isRequired,
   initialEmail: PropTypes.string.isRequired,
-  initialPassword: PropTypes.string.isRequired,
+  initialPassword: PropTypes.string.Optional,
   onSave: PropTypes.func.isRequired,
 };
 
