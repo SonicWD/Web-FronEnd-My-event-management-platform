@@ -39,6 +39,10 @@ const Login = () => {
         }
     };
 
+    const handleSignUp = () => {
+        navigate('/create-account');
+    };
+
     return (
         <div className="login">
             <div className="form-container">   
@@ -72,7 +76,9 @@ const Login = () => {
                     <div className="login-links">
                         {/* No se va a utilizar de momento */}
                         {/* <a href="/" className="login-link">Forgot my password</a> */}
-                        <input type="submit" value="sign up" className="secondary-button login-button" />
+                        <button type="button" className="secondary-button login-button" onClick={handleSignUp}>
+                            Sign Up
+                        </button>
                     </div>
                 </form>
             </div>

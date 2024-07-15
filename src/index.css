@@ -340,6 +340,8 @@ css para password_recovery2
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 1000;
+  background-color: #f4f4f4;
 }
 
 .navbar-left ul,

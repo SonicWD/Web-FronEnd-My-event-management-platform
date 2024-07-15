@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Main/Navbar';
 import TestComponent from './components/Main/TestComponent';
 import Login from './components/accounts-login/Login';
@@ -9,9 +9,12 @@ import AccountPage from './components/Account/AccountPage';
 import PrivateRoute from './PrivateRoute';
 
 const App = () => {
+  const location = useLocation();
+  const hideNavbarRoutes = ['/login', '/create-account'];
+
   return (
-    <Router>
-      <Navbar />
+    <div>
+      {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
       <div className="App">
         <Routes>
           <Route path="/" element={<TestComponent />} exact />
@@ -22,8 +25,14 @@ const App = () => {
           <Route path="/account" element={<PrivateRoute element={AccountPage} />} />
         </Routes>
       </div>
-    </Router>
+    </div>
   );
 };
 
-export default App;
+const AppWrapper = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default AppWrapper;
