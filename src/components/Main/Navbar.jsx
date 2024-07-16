@@ -36,7 +36,7 @@ const Navbar = () => {
     <header className="navbar">
       <img src="/images/icons/icon_menu.svg" alt="menu" className="menu" />
       <div className="navbar-left">
-        <img src="/images/logos/logo.svg" alt="logo" className="logo-navbar" onClick={() => navigateTo('/')}/>
+        <img src="/images/logos/logo.svg" alt="logo" className="logo-navbar" onClick={() => navigateTo('/eventsP')}/>
         <ul>
           <li><a onClick={() => navigateTo('/create-event')}>Crear Evento</a></li>
           <li><a onClick={() => navigateTo('/eventsP')}>Ver Eventos</a></li>

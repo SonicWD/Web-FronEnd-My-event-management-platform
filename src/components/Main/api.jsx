@@ -16,7 +16,7 @@ export const getUserInfo = async (token) => {
         }
 
         const data = await response.json();
-        // console.log('User Info:', data); // Verifica que los datos se impriman correctamente en la consola
+        console.log('User Info:', data); // Verifica que los datos se impriman correctamente en la consola
 
         return data;
     } catch (error) {

@@ -20,7 +20,7 @@ const App = () => {
           <Route path="/" element={<TestComponent />} exact />
           <Route path="/login" element={<Login />} />
           <Route path="/create-account" element={<CreateAccount />} />
-          <Route path="/create-event" element={<PrivateRoute element={CreateEvent} />} />
+          <Route path="/create-event" element={<PrivateRoute element={CreateEvent}/>} />
           <Route path="/eventsP/*" element={<PrivateRoute element={EventPage} />} />
           <Route path="/account" element={<PrivateRoute element={AccountPage} />} />
         </Routes>
