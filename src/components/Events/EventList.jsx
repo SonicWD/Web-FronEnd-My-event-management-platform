@@ -2,11 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import '../../index.css';
 
 const EventList = ({ onSelectEvent }) => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [filter, setFilter] = useState('');
+    const [filteredEvents, setFilteredEvents] = useState([]);
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -22,6 +25,19 @@ const EventList = ({ onSelectEvent }) => {
         fetchEvents();
     }, []);
 
+    useEffect(() => {
+        setFilteredEvents(
+            events.filter(event => {
+                const title = event.title?.toLowerCase() || '';
+                const description = event.description?.toLowerCase() || '';
+                const location = event.location?.toLowerCase() || '';
+                return title.includes(filter.toLowerCase()) ||
+                       description.includes(filter.toLowerCase()) ||
+                       location.includes(filter.toLowerCase());
+            })
+        );
+    }, [filter, events]);
+
     if (loading) {
         return <p className="text-center mt-4">Loading events...</p>;
     }
@@ -33,11 +49,18 @@ const EventList = ({ onSelectEvent }) => {
     return (
         <div className="cards-container">
             <h2 className="text-2xl font-bold mb-4">Events</h2>
-            {events.length === 0 ? (
+            <input
+                type="text"
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                placeholder="Filter events"
+                className="filter-input"
+            />
+            {filteredEvents.length === 0 ? (
                 <p className="text-center">No events available</p>
             ) : (
                 <div className="cards-container">
-                    {events.map((event) => (
+                    {filteredEvents.map((event) => (
                         <div key={event.id} className="product-card" onClick={() => onSelectEvent(event)}>
                             <img src={event.image} alt={event.title} />
                             <div className="product-info">

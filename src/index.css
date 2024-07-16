@@ -593,6 +593,24 @@ css para password_recovery2
 .primary-buttoon:hover {
   background-color: var(--difuminado1-bottom);
 }
+.filter-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.filter-input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
 
 /* Estilos responsivos */
 @media (max-width: 640px) {
