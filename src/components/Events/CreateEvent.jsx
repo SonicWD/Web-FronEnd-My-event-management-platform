@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getUserInfo } from '../Main/api'; // Importa la función de la API aquí
 import '../../index.css';
+import { useNavigate } from 'react-router-dom';
 
 const CreateEvent = () => {
     const [title, setTitle] = useState('');
@@ -11,6 +12,7 @@ const CreateEvent = () => {
     const [ownerId, setOwnerId] = useState(null); // Nuevo estado para almacenar ownerId
     const [imageUrl, setImageUrl] = useState('');
     const [maxCapacity, setMaxCapacity] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -56,6 +58,7 @@ const CreateEvent = () => {
             setDate('');
             setImageUrl('');
             setMaxCapacity('');
+            navigate('/eventsP');
         } catch (error) {
             console.error('Error creating event:', error);
             alert('Failed to create event');

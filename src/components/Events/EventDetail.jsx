@@ -95,7 +95,7 @@ const EventDetail = ({ event, onClose }) => {
         setErrorMessage("Event capacity reached");
         console.log("Error message set to: Event capacity reached");
       } else {
-        alert("Failed to register for the event");
+        alert("you are already registered for this event");
       }
     }
   };
