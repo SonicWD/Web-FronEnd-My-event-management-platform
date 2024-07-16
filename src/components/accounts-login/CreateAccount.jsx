@@ -1,12 +1,11 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
-import '../../index.css';
 import { useNavigate } from 'react-router-dom';
 
 const CreateAccount = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState(false);  // Estado para el rol
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const navigate = useNavigate();
@@ -56,6 +55,7 @@ const CreateAccount = () => {
                     username: name,
                     email: email,
                     password: password,
+                    role: role,  // Incluir el rol en la solicitud
                 }),
             });
 
@@ -109,6 +109,16 @@ const CreateAccount = () => {
                             required
                         />
                         {passwordError && <p className="error">{passwordError}</p>}
+                        <label htmlFor="role" className="label">Role</label>
+                        <select
+                            id="role"
+                            className="input input-role"
+                            value={role ? "organizer" : "attendee"}
+                            onChange={(e) => setRole(e.target.value === "organizer")}
+                        >
+                            <option value="attendee">Asistidor</option>
+                            <option value="organizer">Organizador</option>
+                        </select>
                     </div>
                     <input type="submit" value="Create" className="primary-button create-account-button" />
                 </form>
@@ -118,4 +128,3 @@ const CreateAccount = () => {
 };
 
 export default CreateAccount;
-
