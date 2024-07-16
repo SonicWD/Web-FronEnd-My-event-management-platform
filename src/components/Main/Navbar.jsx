@@ -25,7 +25,7 @@ const Navbar = () => {
   const logout = () => {
     setUsername('');// Limpia el array con la info del user
     localStorage.removeItem('token'); // Elimina el token del localStorage
-    navigate('/login');
+    navigate('/');
   };
 
   const navigateTo = (path) => {
@@ -41,6 +41,7 @@ const Navbar = () => {
           <li><a onClick={() => navigateTo('/create-event')}>Crear Evento</a></li>
           <li><a onClick={() => navigateTo('/eventsP')}>Ver Eventos</a></li>
           <li><a onClick={() => navigateTo('/account')}>Cuenta</a></li>
+          
         </ul>
       </div>
       <div className="navbar-right">

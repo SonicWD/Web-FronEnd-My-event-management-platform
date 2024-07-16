@@ -135,6 +135,23 @@ css para password_recovery2
   width: 250px;
   margin: 10px auto; /* Margen vertical a los botones */
 }
+.primary-buttoon {
+  padding: 10px 20px;
+  background-color: var(--hospital-green);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: var(--md);
+  font-weight: bold;
+  height: 50px;
+  width: 250px;
+  margin: 10px ; /* Margen vertical a los botones */
+}
+.primary-buttoon:hover {
+  background-color: var(--difuminado1-bottom);
+}
 .primary-button:hover {
   background-color: var(--difuminado1-bottom);
 }
@@ -545,18 +562,37 @@ css para password_recovery2
   transform: rotate(180deg);
   margin-right: 24px;
 }
-.error-message {
-  color: red; /* Color del texto */
-  font-weight: bold; /* Negrita */
-  font-size: 14px; /* Tamaño de la fuente */
-  margin-top: 10px; /* Espacio arriba del mensaje */
-  margin-bottom: 10px; /* Espacio abajo del mensaje */
-  padding: 10px; /* Relleno interno */
-  background-color: #ffe6e6; /* Fondo con color suave */
-  border: 1px solid red; /* Borde rojo */
-  border-radius: 5px; /* Bordes redondeados */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
 }
-
+.button-group {
+  display: flex;
+  gap: 15px;
+}
+.primary-buttoon {
+  padding: 10px 20px;
+  background-color: var(--hospital-green);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: var(--md);
+  font-weight: bold;
+  height: 50px;
+  width: 250px;
+  margin: 10px ; /* Margen vertical a los botones */
+}
+.primary-buttoon:hover {
+  background-color: var(--difuminado1-bottom);
+}
 
 /* Estilos responsivos */
 @media (max-width: 640px) {

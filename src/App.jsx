@@ -10,7 +10,7 @@ import PrivateRoute from './PrivateRoute';
 
 const App = () => {
   const location = useLocation();
-  const hideNavbarRoutes = ['/login', '/create-account'];
+  const hideNavbarRoutes = ['/login', '/create-account', '/'];
 
   return (
     <div>

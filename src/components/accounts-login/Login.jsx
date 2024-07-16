@@ -27,7 +27,7 @@ const Login = () => {
                 setAuthState({ token, isAuthenticated: true });
 
                 // Redirect to home page or any other route
-                navigate('/');
+                navigate('/eventsP');
                 console.log('Login successful');
             } else {
                 console.error('No token received');
