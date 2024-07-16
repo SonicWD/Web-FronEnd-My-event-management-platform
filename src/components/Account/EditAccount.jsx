@@ -17,7 +17,7 @@ const EditAccount = ({ initialName = '', initialEmail = '', initialPassword = ''
 
     try {
       const response = await axios.put(
-        'http://localhost:8000/updateUser', 
+        'http://0.0.0.0:10000/updateUser', 
         { username: name, email, password },
         {
           headers: {

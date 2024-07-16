@@ -46,7 +46,7 @@ const CreateAccount = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:8000/user-register', {
+            const response = await fetch('http://0.0.0.0:10000/user-register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

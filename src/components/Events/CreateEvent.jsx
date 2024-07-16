@@ -45,7 +45,7 @@ const CreateEvent = () => {
             };
     
             console.log(eventData)
-            await axios.post('http://localhost:8000/events-create', eventData, {
+            await axios.post('http://0.0.0.0:10000/events-create', eventData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
