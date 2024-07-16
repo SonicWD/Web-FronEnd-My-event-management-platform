@@ -45,7 +45,7 @@ const CreateEvent = () => {
             };
     
             console.log(eventData)
-            await axios.post('http://0.0.0.0:10000/events-create', eventData, {
+            await axios.post('https://event-app-backend-44ux.onrender.com/events-create', eventData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'

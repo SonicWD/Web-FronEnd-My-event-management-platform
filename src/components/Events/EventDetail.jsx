@@ -45,7 +45,7 @@ const EventDetail = ({ event, onClose }) => {
 
     try {
       const response = await axios.get(
-        `http://0.0.0.0:10000/events/${event.id}/registrations`,
+        `https://event-app-backend-44ux.onrender.com/events/${event.id}/registrations`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -78,7 +78,7 @@ const EventDetail = ({ event, onClose }) => {
     try {
       // eslint-disable-next-line no-unused-vars
       const response = await axios.post(
-        `http://0.0.0.0:10000/events/${event.id}/register`,
+        `https://event-app-backend-44ux.onrender.com/events/${event.id}/register`,
         {
           event_id: event.id,
           user_id: userInfo.id, // Utilizamos userInfo.id obtenido de getUserInfo

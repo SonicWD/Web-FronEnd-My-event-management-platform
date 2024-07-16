@@ -46,7 +46,7 @@ const CreateAccount = () => {
         }
 
         try {
-            const response = await fetch('http://0.0.0.0:10000/user-register', {
+            const response = await fetch('https://event-app-backend-44ux.onrender.com/user-register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

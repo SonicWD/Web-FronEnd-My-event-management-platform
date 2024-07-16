@@ -15,7 +15,7 @@ const Login = () => {
         e.preventDefault();
         try {
             // Send login request to the server
-            const response = await axios.post('http://0.0.0.0:10000/login', { username, password });
+            const response = await axios.post('https://event-app-backend-44ux.onrender.com/login', { username, password });
 
             // Extract the token from the response
             const token = response.data.access_token;
