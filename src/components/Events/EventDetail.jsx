@@ -8,7 +8,6 @@ const EventDetail = ({ event, onClose }) => {
   const [registrations, setRegistrations] = useState([]);
   const [isRegistered, setIsRegistered] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
-  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -53,8 +52,12 @@ const EventDetail = ({ event, onClose }) => {
           },
         }
       );
+      console.log("Registrations fetched:", response.data);
       setRegistrations(response.data || []);
-      setIsRegistered(response.data.some(reg => reg.user.id === userInfo.id));
+
+      if (userInfo && userInfo.id) {
+        setIsRegistered(response.data.some(reg => reg.user.id === userInfo.id));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +76,8 @@ const EventDetail = ({ event, onClose }) => {
     }
 
     try {
-      await axios.post(
+      // eslint-disable-next-line no-unused-vars
+      const response = await axios.post(
         `http://localhost:8000/events/${event.id}/register`,
         {
           event_id: event.id,
@@ -92,15 +96,16 @@ const EventDetail = ({ event, onClose }) => {
     } catch (error) {
       console.error("Failed to register for the event:", error);
       if (error.response && error.response.status === 400 && error.response.data.detail === "Event capacity reached") {
-        setErrorMessage("Event capacity reached");
-        console.log("Error message set to: Event capacity reached");
+        alert("La capacidad máxima del evento ha sido alcanzada y no se puede registrar más.");
       } else {
-        alert("you are already registered for this event");
+        alert("No te puedes inscribirte 2 veces al evento");
       }
     }
   };
 
   if (!event) return null;
+
+  const isEventFull = registrations.length >= event.max_capacity;
 
   return (
     <aside className="product-detail">
@@ -117,15 +122,17 @@ const EventDetail = ({ event, onClose }) => {
         <p>Organizado por: {event.owner_username}</p>
         <p>Capacidad: {event.max_capacity}</p>
 
-        <button
-          className="primary-button add-to-cart-button"
-          onClick={handleRegister}
-          disabled={isRegistered || registrations.length >= event.max_capacity}
-        >
+        {!isEventFull && !isRegistered && (
+          <button
+            className="primary-button add-to-cart-button"
+            onClick={handleRegister}
+          >
           {isRegistered ? "Registrado" : "Incribirse"}
-        </button>
 
-        {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar el mensaje de error */}
+          </button>
+        )}
+
+        {isEventFull && <p className="event-full-message">EVENTO LLENO</p>}
 
         <div>
           <h3>Participants:</h3>
