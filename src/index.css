@@ -166,6 +166,19 @@ css para password_recovery2
   background-color: var(--difuminado2-bottom);
   color: var(--white);
 }
+.edit-event-button{
+  display: flex;
+  margin: 0 auto;
+  background-color: #626abf;
+  justify-content: center;
+  align-items: center;
+}
+.edit-event-button:hover{
+  background-color: #7a81c9;
+}
+a{
+  text-decoration: none;
+}
 /*css de la cartas de compra */
 .cards-container {
   display: flex;
