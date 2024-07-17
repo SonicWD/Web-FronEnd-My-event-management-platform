@@ -14,7 +14,7 @@ const EventList = ({ onSelectEvent }) => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await axios.get('https://event-app-backend-44ux.onrender.com/events');
+                const response = await axios.get('http://127.0.0.1:8000/events');
                 setEvents(response.data);
             } catch (error) {
                 setError('Error fetching events');
