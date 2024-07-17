@@ -44,7 +44,7 @@ const CreateEvent = () => {
                 event_type: eventType // Add event type to the data
             };
 
-            await axios.post('http://127.0.0.1:8000/events-create', eventData, {
+            await axios.post('https://event-app-backend-44ux.onrender.com/events-create', eventData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'

@@ -30,7 +30,7 @@ const UpdateEvent = () => {
 
         const fetchEventDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/events/${eventId}`);
+                const response = await axios.get(`https://event-app-backend-44ux.onrender.com/events/${eventId}`);
                 const event = response.data;
                 setTitle(event.title);
                 setDescription(event.description);
@@ -60,7 +60,7 @@ const UpdateEvent = () => {
                 event_type: eventType
             };
 
-            await axios.put(`http://localhost:8000/events-update/${eventId}`, eventData, {
+            await axios.put(`https://event-app-backend-44ux.onrender.com/events-update/${eventId}`, eventData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'

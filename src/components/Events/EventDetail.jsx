@@ -41,7 +41,7 @@ const EventDetail = ({ event, onClose }) => {
 
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/events/${event.id}/registrations`,
+        `hthttps://event-app-backend-44ux.onrender.com/events/${event.id}/registrations`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -72,7 +72,7 @@ const EventDetail = ({ event, onClose }) => {
 
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8000/events/${event.id}/register`,
+        `https://event-app-backend-44ux.onrender.com/events/${event.id}/register`,
         {
           event_id: event.id,
           user_id: userInfo.id,

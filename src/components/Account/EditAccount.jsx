@@ -17,7 +17,7 @@ const EditAccount = ({ initialName = '', initialEmail = '', initialPassword = ''
 
     try {
       const response = await axios.put(
-        'http://127.0.0.1:8000/updateUser', 
+        'https://event-app-backend-44ux.onrender.com/updateUser', 
         { username: name, email, password },
         {
           headers: {
