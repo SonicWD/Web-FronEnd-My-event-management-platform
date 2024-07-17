@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../../index.css';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { API_URL } from "../config/config"; // Importa la URL de la API
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -15,7 +16,7 @@ const Login = () => {
         e.preventDefault();
         try {
             // Send login request to the server
-            const response = await axios.post('http://127.0.0.1:8000/login', { username, password });
+            const response = await axios.post(`${API_URL}/login`,{ username, password });
 
             // Extract the token from the response
             const token = response.data.access_token;

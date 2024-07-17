@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUserInfo } from './api'; 
@@ -6,6 +5,7 @@ import '../../index.css';
 
 const Navbar = () => {
   const [username, setUsername] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,34 +23,37 @@ const Navbar = () => {
   }, []);
 
   const logout = () => {
-    setUsername('');// Limpia el array con la info del user
-    localStorage.removeItem('token'); // Elimina el token del localStorage
+    setUsername('');
+    localStorage.removeItem('token');
     navigate('/');
   };
 
   const navigateTo = (path) => {
+    setMenuOpen(false); // Close menu on navigation
     navigate(path);
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
   };
 
   return (
     <header className="navbar">
-      <img src="/images/icons/icon_menu.svg" alt="menu" className="menu" />
+      <img src="/images/icons/icon_menu.svg" alt="menu" className="menu" onClick={toggleMenu} />
       <div className="navbar-left">
-        <img src="/images/logos/logo.svg" alt="logo" className="logo-navbar" onClick={() => navigateTo('/eventsP')}/>
-        <ul>
+        <img src="/images/logos/logo.svg" alt="logo" className="logo-navbar" onClick={() => navigateTo('/eventsP')} />
+        <ul className={`menu-items ${menuOpen ? 'open' : ''}`}>
           <li><a onClick={() => navigateTo('/create-event')}>Crear Evento</a></li>
           <li><a onClick={() => navigateTo('/eventsP')}>Ver Eventos</a></li>
           <li><a onClick={() => navigateTo('/account')}>Cuenta</a></li>
-          
         </ul>
       </div>
       <div className="navbar-right">
-        <ul>
-          <li className="email-nav">
+        <ul className={`menu-items ${menuOpen ? 'open' : ''}`}>
+          <li>
             <a>{username}</a>
             <a onClick={logout}>Cerrar sesión</a>
-          </li>
-    
+          </li> 
         </ul>
       </div>
     </header>

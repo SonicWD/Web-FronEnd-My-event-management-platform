@@ -4,6 +4,7 @@ import axios from 'axios';
 import { getUserInfo } from '../Main/api';
 import '../../index.css';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from "../config/config"; // Importa la URL de la API
 
 const CreateEvent = () => {
     const [title, setTitle] = useState('');
@@ -44,7 +45,7 @@ const CreateEvent = () => {
                 event_type: eventType // Add event type to the data
             };
 
-            await axios.post('http://127.0.0.1:8000/events-create', eventData, {
+            await axios.post(`${API_URL}/events-create`,eventData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'

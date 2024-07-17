@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import '../../index.css';
+import { API_URL } from "../config/config"; // Importa la URL de la API
 
 const EventList = ({ onSelectEvent }) => {
     const [events, setEvents] = useState([]);
@@ -14,7 +15,7 @@ const EventList = ({ onSelectEvent }) => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/events');
+                const response = await axios.get(`${API_URL}/events`);
                 setEvents(response.data);
             } catch (error) {
                 setError('Error fetching events');

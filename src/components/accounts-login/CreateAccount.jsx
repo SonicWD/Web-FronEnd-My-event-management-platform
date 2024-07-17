@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from "../config/config"; // Importa la URL de la API
 
 const CreateAccount = () => {
     const [name, setName] = useState('');
@@ -46,7 +48,8 @@ const CreateAccount = () => {
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/user-register', {
+            const response = await fetch(`${API_URL}/user-register`
+                , {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,9 +1,12 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import '../../index.css';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from "../config/config"; // Importa la URL de la API
+
 
 const EditAccount = ({ initialName = '', initialEmail = '', initialPassword = '', onSave }) => {
   const [name, setName] = useState(initialName);
@@ -17,7 +20,7 @@ const EditAccount = ({ initialName = '', initialEmail = '', initialPassword = ''
 
     try {
       const response = await axios.put(
-        'http://127.0.0.1:8000/updateUser', 
+        `${API_URL}/updateUser`,
         { username: name, email, password },
         {
           headers: {

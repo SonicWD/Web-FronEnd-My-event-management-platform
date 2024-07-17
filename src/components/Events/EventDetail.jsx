@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { getUserInfo } from "../Main/api"; // Asegúrate de importar getUserInfo desde tu archivo de API
+import { API_URL } from "../config/config"; // Importa la URL de la API
 
 const EventDetail = ({ event, onClose }) => {
   const [registrations, setRegistrations] = useState([]);
@@ -44,7 +45,7 @@ const EventDetail = ({ event, onClose }) => {
 
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/events/${event.id}/registrations`,
+        `${API_URL}/events/${event.id}/registrations`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -77,7 +78,7 @@ const EventDetail = ({ event, onClose }) => {
     try {
       // eslint-disable-next-line no-unused-vars
       const response = await axios.post(
-        `http://127.0.0.1:8000/events/${event.id}/register`,
+        `${API_URL}/events/${event.id}/register`,
         {
           event_id: event.id,
           user_id: userInfo.id, // Utilizamos userInfo.id obtenido de getUserInfo

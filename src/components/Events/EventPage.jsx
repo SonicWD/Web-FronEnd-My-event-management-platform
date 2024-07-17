@@ -15,7 +15,6 @@ const EventPage = () => {
 
     return (
         <div>
-            <h1>Event List</h1>
             <Routes>
                 <Route path="/" element={<EventList onSelectEvent={handleSelectEvent} />} />
                 <Route path="event-detail" element={<EventDetail event={selectedEvent} onClose={() => setSelectedEvent(null)} />} />

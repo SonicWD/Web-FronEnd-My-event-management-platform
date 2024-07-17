@@ -1,6 +1,7 @@
+import { API_URL } from "../config/config"; // Importa la URL de la API
 export const getUserInfo = async (token) => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/user-info', {
+        const response = await fetch(`${API_URL}/user-info`,{
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
