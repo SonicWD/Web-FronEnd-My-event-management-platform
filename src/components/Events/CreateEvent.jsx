@@ -43,8 +43,7 @@ const CreateEvent = () => {
                 owner_id: ownerId,
                 event_type: eventType // Add event type to the data
             };
-    
-            console.log(eventData)
+
             await axios.post('https://event-app-backend-44ux.onrender.com/events-create', eventData, {
                 headers: {
                     Authorization: `Bearer ${token}`,

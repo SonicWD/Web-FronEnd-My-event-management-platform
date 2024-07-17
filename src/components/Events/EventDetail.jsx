@@ -31,7 +31,6 @@ const EventDetail = ({ event, onClose }) => {
 
   useEffect(() => {
     if (event) {
-      console.log("EventDetail loaded with event:", event);
       fetchRegistrations(); // Asegúrate de que fetchRegistrations se llame cuando event cambie
     }
   }, [event]); // Añade event al array de dependencias
@@ -52,7 +51,7 @@ const EventDetail = ({ event, onClose }) => {
           },
         }
       );
-      console.log("Registrations fetched:", response.data);
+      console.log("Registrations");
       setRegistrations(response.data || []);
 
       if (userInfo && userInfo.id) {
