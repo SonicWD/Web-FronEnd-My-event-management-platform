@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { getUserInfo } from "../Main/api"; // Asegúrate de importar getUserInfo desde tu archivo de API
 import { API_URL } from "../config/config"; // Importa la URL de la API
+import { Link } from "react-router-dom";
 
 const EventDetail = ({ event, onClose }) => {
   const [registrations, setRegistrations] = useState([]);
@@ -13,17 +14,14 @@ const EventDetail = ({ event, onClose }) => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       const token = localStorage.getItem("token");
-      if (!token) {
-        alert("No token found. Please log in.");
-        return;
-      }
-
-      try {
-        const user = await getUserInfo(token);
-        setUserInfo(user);
-      } catch (error) {
-        console.error("Failed to fetch user info:", error);
-        alert("Failed to fetch user info");
+      if (token) {
+        try {
+          const user = await getUserInfo(token);
+          setUserInfo(user);
+        } catch (error) {
+          console.error("Failed to fetch user info:", error);
+          alert("Failed to fetch user info");
+        }
       }
     };
 
@@ -32,9 +30,9 @@ const EventDetail = ({ event, onClose }) => {
 
   useEffect(() => {
     if (event) {
-      fetchRegistrations(); // Asegúrate de que fetchRegistrations se llame cuando event cambie
+      fetchRegistrations();
     }
-  }, [event]); // Añade event al array de dependencias
+  }, [event]);
 
   const fetchRegistrations = async () => {
     const token = localStorage.getItem("token");
@@ -52,7 +50,6 @@ const EventDetail = ({ event, onClose }) => {
           },
         }
       );
-      console.log("Registrations");
       setRegistrations(response.data || []);
 
       if (userInfo && userInfo.id) {
@@ -81,7 +78,7 @@ const EventDetail = ({ event, onClose }) => {
         `${API_URL}/events/${event.id}/register`,
         {
           event_id: event.id,
-          user_id: userInfo.id, // Utilizamos userInfo.id obtenido de getUserInfo
+          user_id: userInfo.id,
         },
         {
           headers: {
@@ -106,6 +103,7 @@ const EventDetail = ({ event, onClose }) => {
   if (!event) return null;
 
   const isEventFull = registrations.length >= event.max_capacity;
+  const isOrganizer = userInfo?.id === event.owner_id;
 
   return (
     <aside className="product-detail">
@@ -127,8 +125,7 @@ const EventDetail = ({ event, onClose }) => {
             className="primary-button add-to-cart-button"
             onClick={handleRegister}
           >
-          {isRegistered ? "Registrado" : "Incribirse"}
-
+            {isRegistered ? "Registrado" : "Incribirse"}
           </button>
         )}
 
@@ -142,6 +139,12 @@ const EventDetail = ({ event, onClose }) => {
             ))}
           </ul>
         </div>
+
+        {isOrganizer && (
+          <Link to={`/events-update/${event.id}`}>
+            <button className="primary-button edit-event-button">Editar Evento</button>
+          </Link>
+        )}
       </div>
     </aside>
   );
@@ -157,6 +160,7 @@ EventDetail.propTypes = {
     image: PropTypes.string.isRequired,
     owner_username: PropTypes.string.isRequired,
     max_capacity: PropTypes.number.isRequired,
+    owner_id: PropTypes.number.isRequired,
   }),
   onClose: PropTypes.func.isRequired,
 };

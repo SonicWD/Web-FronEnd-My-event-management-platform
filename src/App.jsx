@@ -7,6 +7,7 @@ import CreateAccount from './components/accounts-login/CreateAccount';
 import EventPage from './components/Events/EventPage';
 import AccountPage from './components/Account/AccountPage';
 import PrivateRoute from './PrivateRoute';
+import UpdateEvent from './components/Events/UpdateEvent'
 
 const App = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/create-event" element={<PrivateRoute element={CreateEvent}/>} />
           <Route path="/eventsP/*" element={<PrivateRoute element={EventPage} />} />
           <Route path="/account" element={<PrivateRoute element={AccountPage} />} />
+          <Route path="/events-update/:eventId" element={<PrivateRoute element={UpdateEvent} />} />
         </Routes>
       </div>
     </div>

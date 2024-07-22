@@ -3,16 +3,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getUserInfo } from '../Main/api';
 import '../../index.css';
-import { useNavigate } from 'react-router-dom';
-import { API_URL } from "../config/config"; // Importa la URL de la API
-//Poner limites de formulario
-const CreateEvent = () => {
+import { useNavigate, useParams } from 'react-router-dom';
+
+const UpdateEvent = () => {
+    const { eventId } = useParams();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
     const [ownerId, setOwnerId] = useState(null);
     const [maxCapacity, setMaxCapacity] = useState('');
-    const [eventType, setEventType] = useState('virtual');
+    const [eventType, setEventType] = useState('presencial'); // Default event type
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,47 +28,57 @@ const CreateEvent = () => {
             }
         };
 
+        const fetchEventDetails = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8000/events/${eventId}`);
+                const event = response.data;
+                setTitle(event.title);
+                setDescription(event.description);
+                setDate(event.date);
+                setMaxCapacity(event.max_capacity);
+                setEventType(event.event_type);
+            } catch (error) {
+                console.error('Error fetching event details:', error);
+            }
+        };
+
         fetchUserInfo();
-    }, []);
+        fetchEventDetails();
+    }, [eventId]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const token = localStorage.getItem('token');
-    
+
             const eventData = {
                 title,
                 description,
                 date,
                 max_capacity: parseInt(maxCapacity),
                 owner_id: ownerId,
-                event_type: eventType // Add event type to the data
+                event_type: eventType
             };
 
-            await axios.post(`${API_URL}/events-create`,eventData, {
+            await axios.put(`http://localhost:8000/events-update/${eventId}`, eventData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 }
             });
-    
-            alert('Event created successfully');
-            setTitle('');
-            setDescription('');
-            setDate('');
-            setMaxCapacity('');
-            setEventType('presencial'); // Reset to default
+
+            alert('Event updated successfully');
             navigate('/eventsP');
         } catch (error) {
-            console.error('Error creating event:', error);
-            alert('Failed to create event');
+            console.error('Error updating event:', error);
+            alert('Failed to update event');
         }
     };
 
     return (
         <div className="login">
             <div className="form-container">   
-                <h1 className="title">Create Event</h1>
+                <h1 className="title">Update Event</h1>
                 <form onSubmit={handleSubmit} className="form">
                     <div>
                         <label htmlFor="title" className="label">Title:</label>
@@ -129,11 +139,11 @@ const CreateEvent = () => {
                             <option value="virtual">Virtual</option>
                         </select>
                     </div>
-                    <button type="submit" className="primary-button login-button">Create Event</button>
+                    <button type="submit" className="primary-button login-button">Update Event</button>
                 </form>
             </div>
         </div>
     );
 };
 
-export default CreateEvent;
+export default UpdateEvent;
