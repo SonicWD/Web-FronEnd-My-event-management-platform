@@ -1,5 +1,6 @@
 // src/config/config.js
 
+// eslint-disable-next-line react-refresh/only-export-components
 const ENV = "development"; // Cambia a "production" o a "development"
 
 const config = {
