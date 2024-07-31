@@ -10,6 +10,7 @@ const CreateAccount = () => {
     const [role, setRole] = useState(false);  // Estado para el rol
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseña
     const navigate = useNavigate();
 
     const validateEmail = (email) => {
@@ -21,7 +22,7 @@ const CreateAccount = () => {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         return passwordRegex.test(password);
     };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Form submitted');
@@ -48,8 +49,7 @@ const CreateAccount = () => {
         }
 
         try {
-            const response = await fetch(`${API_URL}/user-register`
-                , {
+            const response = await fetch(`${API_URL}/user-register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,6 +72,10 @@ const CreateAccount = () => {
         } catch (error) {
             console.error('Error:', error);
         }
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
 
     return (
@@ -102,15 +106,24 @@ const CreateAccount = () => {
                         />
                         {emailError && <p className="error">{emailError}</p>}
                         <label htmlFor="password" className="label">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="*********"
-                            className="input input-password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                        <div className="password-container">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                placeholder="*********"
+                                className="input input-password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                           <button
+    type="button"
+    className="toggle-password-btn"
+    onClick={togglePasswordVisibility}
+>
+    <img src={showPassword ? "/images/icons/view-password-on.svg" : "/images/icons/view-password-off.svg"} alt="Toggle Password Visibility" />
+</button>
+                        </div>
                         {passwordError && <p className="error">{passwordError}</p>}
                         <label htmlFor="role" className="label">Role</label>
                         <select

@@ -598,7 +598,33 @@ a{
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   outline: none;
 }
+.toggle-password-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000;
+}
 
+
+.toggle-password-btn img {
+  width: 20px;
+  height: 20px;
+}
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-password {
+  padding-right: 40px; /* Asegura que el botón no se superponga con el texto */
+}
 
 /* Estilos responsivos */
 @media (max-width: 640px) {
