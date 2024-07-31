@@ -9,6 +9,7 @@ import { API_URL } from "../config/config"; // Importa la URL de la API
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const { setAuthState } = useContext(AuthContext);
 
@@ -16,7 +17,7 @@ const Login = () => {
         e.preventDefault();
         try {
             // Send login request to the server
-            const response = await axios.post(`${API_URL}/login`,{ username, password });
+            const response = await axios.post(`${API_URL}/login`, { username, password });
 
             // Extract the token from the response
             const token = response.data.access_token;
@@ -44,6 +45,10 @@ const Login = () => {
         navigate('/create-account');
     };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div className="login">
             <div className="form-container">   
@@ -61,10 +66,10 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <div>
+                    <div className="password-container">
                         <label htmlFor="password" className="label">Password</label>
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -72,6 +77,17 @@ const Login = () => {
                             className="input input-password"
                             required
                         />
+                        <button
+                            type="button"
+                            className="toggle-password-btn"
+                            onClick={togglePasswordVisibility}
+                        >
+                            <img
+                                src={showPassword ? "/images/icons/view-password-on.svg" : "/images/icons/view-password-off.svg"}
+                                alt="toggle password visibility"
+                                className="toggle-password-icon"
+                            />
+                        </button>
                     </div>
                     <input type="submit" value="log in" className="primary-button login-button" />
                     <div className="login-links">

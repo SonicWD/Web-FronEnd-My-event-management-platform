@@ -7,11 +7,11 @@ import '../../index.css';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from "../config/config"; // Importa la URL de la API
 
-
 const EditAccount = ({ initialName = '', initialEmail = '', initialPassword = '', onSave }) => {
   const [name, setName] = useState(initialName);
   const [email, setEmail] = useState(initialEmail);
   const [password, setPassword] = useState(initialPassword);
+  const [showPassword, setShowPassword] = useState(false);  // Estado para visibilidad de la contraseña
   const { authState } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -41,6 +41,10 @@ const EditAccount = ({ initialName = '', initialEmail = '', initialPassword = ''
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <form onSubmit={handleSubmit} className="form">
       <div>
@@ -61,12 +65,25 @@ const EditAccount = ({ initialName = '', initialEmail = '', initialPassword = ''
         />
         
         <label htmlFor="password" className="label">Contraseña</label>
-        <input 
-          type="password" 
-          className="input" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-        />
+        <div className="password-container">
+          <input 
+            type={showPassword ? "text" : "password"} 
+            className="input" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+          />
+          <button
+            type="button"
+            className="toggle-password-btn"
+            onClick={togglePasswordVisibility}
+          >
+            <img
+              src={showPassword ? "/images/icons/view-password-on.svg" : "/images/icons/view-password-off.svg"}
+              alt="toggle password visibility"
+              className="toggle-password-icon"
+            />
+          </button>
+        </div>
       </div>
       <input type="submit" value="Guardar" className="primary-button" />
     </form>
