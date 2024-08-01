@@ -155,7 +155,7 @@ css para password_recovery2
 .primary-button:hover {
   background-color: var(--difuminado1-bottom);
 }
-.secondary-button {
+.secondary-button{
   background-color: var(--white);
   border: 1px solid var(--hospital-green);
   color: var(--hospital-green);
@@ -626,13 +626,128 @@ a{
   padding-right: 40px; /* Asegura que el botón no se superponga con el texto */
 }
 
+.container-main-page{
+  height: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color:var(--hospital-green);
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+}
+
+.logo-page {
+  height: 20px;
+  display: none;
+}
+
+.header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+/* Contenido Principal */
+.main-content {
+  padding: 20px;
+}
+
+.main-content p {
+  margin: 0 0 15px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.primary-button-main,
+.secondary-button-main {
+  padding: 10px 20px;
+  background-color: var(--hospital-green);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: var(--md);
+  transition: background-color 0.3s, color 0.3s;
+}
+.secondary-button-main {
+  background-color: var(--white);
+  border: 1px solid var(--hospital-green);
+  color: var(--hospital-green);
+  cursor: pointer;
+}
+
+
+.primary-button-main:hover {
+  background-color: var(--difuminado1-bottom);
+}
+
+
+
+.secondary-button-main:hover {
+  background-color: var(--difuminado2-bottom);
+  color: var(--white);
+}
+
+/* Pie de Página */
+.footer {
+  padding: 20px;
+  background-color: var(--hospital-green);
+  color: #fff;
+  border-radius: 0 0 8px 8px;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer a {
+  color: #5a2e83;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+
+
+
 /* Estilos responsivos */
 @media (max-width: 640px) {
   .login {
     width: 70%;
     height: calc(100vh - 80px);
   }
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 
+  .button-group {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .logo-page {
+    height: 50px;
+    display: block;
+  }
   .logo {
     width: 200px;
     height: 90px;

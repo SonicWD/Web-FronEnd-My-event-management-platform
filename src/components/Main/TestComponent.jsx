@@ -11,18 +11,32 @@ const TestComponent = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Bienvenido a la Página de Eventos</h1>
-      <p>
-        Descubre y participa en eventos emocionantes. Nuestra plataforma te permite registrarte en eventos, ver detalles de los eventos, y gestionar tus inscripciones.
-      </p>
-      <p>
-        Para empezar, por favor inicia sesión o crea una cuenta si aún no tienes una.
-      </p>
-      <div className="button-group">
-        <button className="primary-buttoon" onClick={() => navigateTo('/login')}>Iniciar Sesión</button>
-        <button className="primary-buttoon" onClick={() => navigateTo('/create-account')}>Crear Cuenta</button>
-      </div>
+    <div className="container-main-page">
+      <header className="header">
+        <img src="/images/logos/logo.svg" alt="Logo" className="logo-page" />
+        <h1>Bienvenido a la Página de Eventos</h1>
+      </header>
+      
+      <main className="main-content">
+        <p>
+          Descubre y participa en eventos emocionantes. Nuestra plataforma te permite registrarte en eventos, ver detalles de los eventos, y gestionar tus inscripciones.
+        </p>
+        <p>
+          Para empezar, por favor inicia sesión o crea una cuenta si aún no tienes una.
+        </p>
+        
+        <div className="button-group">
+          <button className="primary-button-main" onClick={() => navigateTo('/login')}>Iniciar Sesión</button>
+          <button className="secondary-button-main" onClick={() => navigateTo('/create-account')}>Crear Cuenta</button>
+        </div>
+      </main>
+      
+      <footer className="footer">
+        <p>&copy; 2024 Event Platform. Todos los derechos reservados.</p>
+        <p>
+          <a href="/contact">Contáctanos</a> | <a href="/privacy-policy">Política de Privacidad</a>
+        </p>
+      </footer>
     </div>
   );
 };
