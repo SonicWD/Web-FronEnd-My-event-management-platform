@@ -13,9 +13,14 @@ const Navbar = () => {
     const fetchUserInfo = async () => {
       const token = localStorage.getItem('token');
       if (token) {
-        const userInfo = await getUserInfo(token);
-        if (userInfo) {
-          setUsername(userInfo.username);
+        try {
+          const userInfo = await getUserInfo(token);
+          if (userInfo) {
+            setUsername(userInfo.username);
+          }
+        } catch (error) {
+          console.error('Failed to fetch user info:', error);
+          setUsername(''); // Clear username on error
         }
       }
     };
@@ -35,9 +40,14 @@ const Navbar = () => {
 
   return (
     <header className="navbar">
-      <MenuButton navigateTo={navigateTo} username={username} logout={logout} />
+      <MenuButton navigateTo={navigateTo} username={username} logout={logout} className="menu-button"/>
       <div className="navbar-left">
-        <img src="/images/logos/logo.svg" alt="logo" className="logo-navbar" onClick={() => navigateTo('/eventsP')} />
+        <img
+          src="/images/logos/logo.svg"
+          alt="logo"
+          className="logo-navbar"
+          onClick={() => navigateTo('/eventsP')}
+        />
         <ul className="menu-items">
           <li><a onClick={() => navigateTo('/create-event')}>Crear Evento</a></li>
           <li><a onClick={() => navigateTo('/eventsP')}>Ver Eventos</a></li>
@@ -47,7 +57,7 @@ const Navbar = () => {
       <div className="navbar-right">
         <ul className="menu-items">
           <li>
-            <a>{username}</a>
+            <span>{username}</span>
             <a onClick={logout}>Cerrar sesión</a>
           </li> 
         </ul>
