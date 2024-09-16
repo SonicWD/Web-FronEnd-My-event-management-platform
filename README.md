@@ -5,7 +5,7 @@
 
 ## Descripción
 
-Esta es una aplicación de administración de eventos construida con React. Permite a los usuarios ver una lista de eventos, hacer clic en un evento para ver los detalles y registrar eventos. Actualmente, la aplicación utiliza datos falsos para desarrollo mientras se implementa el backend.
+Esta es una aplicación de administración de eventos construida con React. Permite a los usuarios ver una lista de eventos, hacer clic en un evento para ver los detalles y registrar eventos. Actualmente, la aplicación utiliza datos falsos para desarrollo mientras se implementa el backend. Puedes visitar el repositorio del backend [aquí](https://github.com/SonicWD/Web-FronEnd-My-event-management-platform).
 
   
 
